@@ -6,7 +6,7 @@ set -euo pipefail
 # automatically reboot the server if it goes down. We don't want to lose the
 # key after a reboot.
 echo '${service_account_key}' >/var/svc_account_key.json
-chmod 400 /var/svc_account_key.json
+chmod 444 /var/svc_account_key.json
 
 # TODO: delete this line and add the `--pull=always` flag to `docker run`
 docker pull gcr.io/cloudsql-docker/gce-proxy:latest
