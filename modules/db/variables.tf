@@ -18,6 +18,7 @@ variable "instance_type" {
 variable "password" {
   description = "The db password used to connect to the Postgers db"
   type        = string
+  sensitive   = true
 }
 
 variable "user" {
