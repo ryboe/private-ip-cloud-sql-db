@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "**/.terraform/": true,
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+}
