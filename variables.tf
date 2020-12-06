@@ -3,4 +3,5 @@
 variable "db_password" {
   description = "The Postgres password"
   type        = string
+  sensitive   = true
 }
