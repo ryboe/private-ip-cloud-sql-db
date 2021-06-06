@@ -1,38 +1,3 @@
-// root module
-
-terraform {
-  required_version = ">= 0.14.0"
-  required_providers {
-    tfe = {
-      source  = "hashicorp/tfe"
-      version = ">= 0.23.0"
-    }
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 3.49.0"
-    }
-  }
-  backend "remote" {
-    organization = "my-terraform-cloud-org"
-    workspaces {
-      name = "private-ip-cloud-sql-db"
-    }
-  }
-}
-
-locals {
-  db_username      = "my_user" # Postgres username
-  gcp_project_name = "my-gcp-project-274601"
-  gcp_region       = "us-central1"
-  gcp_zone         = "us-central1-b"
-}
-
-provider "google" {
-  project = local.gcp_project_name
-  region  = local.gcp_region
-  zone    = local.gcp_zone
-}
-
 module "vpc" {
   source = "./modules/vpc"
 
@@ -45,7 +10,7 @@ module "db" {
   disk_size     = 10
   instance_type = "db-f1-micro"
   password      = var.db_password # This is a variable because it's a secret. It's stored here: https://app.terraform.io/app/<YOUR-ORGANIZATION>/workspaces/<WORKSPACE>/variables
-  user          = local.db_username
+  user          = var.db_username
   vpc_name      = module.vpc.name
   vpc_link      = module.vpc.link
 
@@ -64,10 +29,10 @@ module "dbproxy" {
 
   machine_type     = "f1-micro"
   db_instance_name = module.db.connection_name # e.g. my-project:us-central1:my-db
-  region           = local.gcp_region
-  zone             = local.gcp_zone
+  region           = var.gcp_region
+  zone             = var.gcp_zone
 
-  # By passing the VPC name ("main-vpc") as the output of the VPC module
-  # (module.vpc.name), we ensure the VPC will be created before the proxy.
+  # By passing the VPC name as the output of the VPC module we ensure the VPC
+  # will be created before the proxy.
   vpc_name = module.vpc.name
 }
