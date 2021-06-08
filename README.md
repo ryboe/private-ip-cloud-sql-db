@@ -3,7 +3,7 @@
 This repo demonstrates how to create a Cloud SQL DB with a private IP address
 only, and connect to it with [Cloud SQL Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy). The full explanation of how this works can be found in [this blog post](https://medium.com/@ryanboehning/how-to-deploy-a-cloud-sql-db-with-a-private-ip-only-using-terraform-e184b08eca64).
 
-Terraform v0.15.0 or higher is required.
+Terraform v1.0.0 or higher is required.
 
 ## How To Use
 
