@@ -1,9 +1,9 @@
+.terraform/
 *_override.tf
 *_override.tf.json
 *.tfstate
 *.tfstate.*
 *.tfvars
-**/.terraform/*
 crash.log
 override.tf
 override.tf.json
