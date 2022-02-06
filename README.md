@@ -40,5 +40,5 @@ Terraform v1.0.0 or higher is required.
     CLOUD_SQL_PROXY_IP=$(terraform output proxy_ip)
 
     # psql into your private db
-    ssh -t <username>@$CLOUD_SQL_PROXY_IP docker run --rm --network=host -it postgres:13-alpine psql -U postgres -h localhost
+    ssh -t <username>@$CLOUD_SQL_PROXY_IP docker run --rm --network=host -it postgres:14-alpine psql -U postgres -h localhost
     ```
