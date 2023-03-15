@@ -21,7 +21,7 @@ module "db" {
   # because we've configured private services access. We need to explicitly
   # specify the dependency here. For details, see the note in the docs here:
   #   https://www.terraform.io/docs/providers/google/r/sql_database_instance.html#private-ip-instance
-  db_depends_on = module.vpc.private_vpc_connection
+  db_depends_on = [module.vpc.private_vpc_connection]
 }
 
 module "dbproxy" {

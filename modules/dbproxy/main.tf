@@ -32,10 +32,13 @@ resource "google_compute_instance" "db_proxy" {
     enable-oslogin = "TRUE"
   }
 
-  metadata_startup_script = templatefile("${path.module}/run_cloud_sql_proxy.tpl", {
-    "db_instance_name"    = var.db_instance_name,
-    "service_account_key" = module.serviceaccount.private_key,
-  })
+  metadata_startup_script = <<-EOT
+    #!/bin/bash
+    set -euo pipefail
+
+    docker container run --pull always --rm -p 127.0.0.1:5432:5432 gcr.io/cloudsql-docker/gce-proxy:latest \
+      /cloud-sql-proxy --json-credentials=${module.serviceaccount.private_key} --private-ip '${var.db_instance_name}:postgres?address=0.0.0.0'
+  EOT
 
   network_interface {
     network    = var.vpc_name

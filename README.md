@@ -3,7 +3,7 @@
 This repo demonstrates how to create a Cloud SQL DB with a private IP address
 only, and connect to it with [Cloud SQL Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy). The full explanation of how this works can be found in [this blog post](https://medium.com/@ryanboehning/how-to-deploy-a-cloud-sql-db-with-a-private-ip-only-using-terraform-e184b08eca64).
 
-Terraform v1.0.0 or higher is required.
+Terraform v1.4.0 or higher is required.
 
 ## How To Use
 
@@ -40,5 +40,5 @@ Terraform v1.0.0 or higher is required.
     CLOUD_SQL_PROXY_IP=$(terraform output proxy_ip)
 
     # psql into your private db
-    ssh -t <username>@$CLOUD_SQL_PROXY_IP docker run --rm --network=host -it postgres:14-alpine psql -U postgres -h localhost
+    ssh -t <username>@$CLOUD_SQL_PROXY_IP docker container run --rm --network=host -it postgres:alpine psql -U postgres -h localhost
     ```

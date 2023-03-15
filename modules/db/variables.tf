@@ -1,8 +1,8 @@
 // db module
 
 variable "db_depends_on" {
-  description = "A single resource that the database instance depends on"
-  type        = any
+  description = "Resources that the database instance depends on"
+  type        = list(any)
 }
 
 variable "disk_size" {

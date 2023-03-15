@@ -8,7 +8,7 @@ resource "google_sql_database" "main" {
 resource "google_sql_database_instance" "main_primary" {
   name             = "main-primary"
   database_version = "POSTGRES_14"
-  depends_on       = [var.db_depends_on]
+  depends_on       = var.db_depends_on
 
   settings {
     tier              = var.instance_type
